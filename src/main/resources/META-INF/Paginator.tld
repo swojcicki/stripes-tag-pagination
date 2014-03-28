@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib>
+    <tlib-version>1.0</tlib-version>
+    <short-name>paginator</short-name>
+    <jsp-version>2.1</jsp-version>
+    <uri>http://student.agh.edu.pl/~wojcicks/taglib/paginator</uri>
+    <tag>
+        <name>paginator</name>
+        <tag-class>pl.edu.agh.student.wojcicks.taglib.PaginatorTagHandler</tag-class>
+        <description>delete function</description>
+        <attribute>
+            <name>currentPage</name>
+            <required>true</required>
+            <type>java.lang.Integer</type>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>pagesCount</name>
+            <required>true</required>
+            <type>java.lang.Integer</type>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>beanclass</name>
+            <required>true</required>
+            <type>java.lang.Object</type>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+</taglib>
