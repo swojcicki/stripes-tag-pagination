@@ -7,7 +7,7 @@
     <tag>
         <name>paginator</name>
         <tag-class>pl.edu.agh.student.wojcicks.taglib.PaginatorTagHandler</tag-class>
-        <description>delete function</description>
+        <description>paginator tag</description>
         <attribute>
             <name>currentPage</name>
             <required>true</required>
