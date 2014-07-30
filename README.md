@@ -10,7 +10,7 @@ $ git clone https://github.com/swojcicki/stripes-tag-pagination.git
 
 ```
 $ cd stripes-tag-pagination
-$ mvn install
+$ mvn source:jar install
 ```
 
 ### Add maven dependency
