@@ -49,31 +49,43 @@ public class PaginatorTagHandler extends LinkTagSupport implements BodyTag {
     }
   }
 
+  private void printlnCube(StringBuilder out, int i, Object label) throws StripesJspException {
+    addParameter("page", i);
+    out.append("<li").append(i == currentPage ? " class=\"active\"" : "").append("><a href=\"").append(buildUrl()).append("\">").append(label).append("</a></li>");
+    clearParameters();
+  }
+
   protected String getNumbers() throws StripesJspException {
     StringBuilder li = new StringBuilder();
-    if (pagesCount > 4) {
-      addParameter("page", 1);
-      li.append("<li").append(1 == currentPage ? " class=\"active\"" : "").append("><a href=\"").append(buildUrl()).append("\">").append(1).append("</a></li>");
-      clearParameters();
+    if (pagesCount > 5) {
+      printlnCube(li, 1, 1);
+      if (currentPage < 3) {
+        printlnCube(li, 2, 2);
+        printlnCube(li, 3, 3);
 
-      addParameter("page", 2);
-      li.append("<li").append(2 == currentPage ? " class=\"active\"" : "").append("><a href=\"").append(buildUrl()).append("\">").append(2).append("</a></li>");
-      clearParameters();
+        li.append("<li class=\"disabled\"><a href=\"#\">...</a></li>");
+      } else if (currentPage > (pagesCount - 2)) {
+        li.append("<li class=\"disabled\"><a href=\"#\">...</a></li>");
 
-      li.append("<li class=\"disabled\"><a href=\"#\">...</a></li>");
+        printlnCube(li, pagesCount - 2, pagesCount - 2);
+        printlnCube(li, pagesCount - 1, pagesCount - 1);
+      } else {
+        if (currentPage > 3) {
+          li.append("<li class=\"disabled\"><a href=\"#\">...</a></li>");
+        }
 
-      addParameter("page", pagesCount - 1);
-      li.append("<li").append((pagesCount - 1) == currentPage ? " class=\"active\"" : "").append("><a href=\"").append(buildUrl()).append("\">").append(pagesCount - 1).append("</a></li>");
-      clearParameters();
+        printlnCube(li, currentPage - 1, currentPage - 1);
+        printlnCube(li, currentPage, currentPage);
+        printlnCube(li, currentPage + 1, currentPage + 1);
 
-      addParameter("page", pagesCount);
-      li.append("<li").append(pagesCount == currentPage ? " class=\"active\"" : "").append("><a href=\"").append(buildUrl()).append("\">").append(pagesCount).append("</a></li>");
-      clearParameters();
+        if (currentPage < pagesCount - 2) {
+          li.append("<li class=\"disabled\"><a href=\"#\">...</a></li>");
+        }
+      }
+      printlnCube(li, pagesCount, pagesCount);
     } else {
       for (int i = 1; i <= pagesCount; i++) {
-        addParameter("page", i);
-        li.append("<li").append(i == currentPage ? " class=\"active\"" : "").append("><a href=\"").append(buildUrl()).append("\">").append(i).append("</a></li>");
-        clearParameters();
+        printlnCube(li, i, i);
       }
     }
     return li.toString();
