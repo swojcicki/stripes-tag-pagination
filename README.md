@@ -45,3 +45,9 @@ $ mvn source:jar install
 <p:paginator currentPage="${actionBean.page}" pagesCount="${actionBean.pagesCount}"
                              beanclass="${actionBean.class.name}"/>
 ```
+
+### Table counter
+
+...
+<td>${loop.count  + actionBean.pageResult * (actionBean.page - 1)}</td>
+...
