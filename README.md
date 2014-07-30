@@ -48,6 +48,6 @@ $ mvn source:jar install
 
 ### Table counter
 
-...
+```
 <td>${loop.count  + actionBean.pageResult * (actionBean.page - 1)}</td>
-...
+```
