@@ -22,6 +22,16 @@ public class PaginatorTagHandler extends LinkTagSupport implements BodyTag {
   private int currentPage;
   private int pagesCount;
 
+  /**
+   * For testing proposes change package.
+   *
+   * @return super.buildUrl()
+   * @throws StripesJspException
+   */
+  protected String buildUrl() throws StripesJspException {
+    return super.buildUrl();
+  }
+
   @Override
   public int doStartTag() throws JspException {
     return EVAL_BODY_BUFFERED;
@@ -32,7 +42,7 @@ public class PaginatorTagHandler extends LinkTagSupport implements BodyTag {
       return "<li class=\"disabled\"><a href=\"#\">&laquo;</a></li>";
     } else {
       addParameter("page", currentPage - 1);
-      String li = "<li><a href=\"" + buildUrl() + "\">&laquo;</a></li>";
+      String li = "<li><a href=\"" + this.buildUrl() + "\">&laquo;</a></li>";
       clearParameters();
       return li;
     }
@@ -43,7 +53,7 @@ public class PaginatorTagHandler extends LinkTagSupport implements BodyTag {
       return ("<li class=\"disabled\"><a href=\"#\">&raquo;</a></li>");
     } else {
       addParameter("page", currentPage + 1);
-      String li = "<li><a href=\"" + buildUrl() + "\">&raquo;</a></li>";
+      String li = "<li><a href=\"" + this.buildUrl() + "\">&raquo;</a></li>";
       clearParameters();
       return li;
     }
@@ -51,7 +61,7 @@ public class PaginatorTagHandler extends LinkTagSupport implements BodyTag {
 
   private void printlnCube(StringBuilder out, int i, Object label) throws StripesJspException {
     addParameter("page", i);
-    out.append("<li").append(i == currentPage ? " class=\"active\"" : "").append("><a href=\"").append(buildUrl()).append("\">").append(label).append("</a></li>");
+    out.append("<li").append(i == currentPage ? " class=\"active\"" : "").append("><a href=\"").append(this.buildUrl()).append("\">").append(label).append("</a></li>");
     clearParameters();
   }
 
